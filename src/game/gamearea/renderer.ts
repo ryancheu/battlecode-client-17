@@ -222,9 +222,7 @@ export default class Renderer {
     this.ctx.beginPath();
     var red = Math.floor(((xvel + 2)/4) * 255);
     var green = Math.floor(((yvel + 2)/4) * 255);
-    console.log("xvel: ", xvel, red);
     this.ctx.fillStyle = `rgb(${red}, ${green}, 200)`;
-    console.log("fill: ", this.ctx.fillStyle);
     this.ctx.arc(x, y, 0.1, 0, 2 * Math.PI, false);
     this.ctx.fill();
 
