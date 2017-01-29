@@ -218,6 +218,23 @@ export default class Renderer {
     this.ctx.fill();
   }
 
+  private drawCircleBullet(x: number, y: number, xvel: number, yvel: number) {
+    this.ctx.beginPath();
+    var red = Math.floor(((xvel + 2)/4) * 255);
+    var green = Math.floor(((yvel + 2)/4) * 255);
+    console.log("xvel: ", xvel, red);
+    this.ctx.fillStyle = `rgb(${red}, ${green}, 200)`;
+    console.log("fill: ", this.ctx.fillStyle);
+    this.ctx.arc(x, y, 0.1, 0, 2 * Math.PI, false);
+    this.ctx.fill();
+
+    this.ctx.beginPath();
+    this.ctx.moveTo(x+(0.25*xvel), y-(0.25*yvel));
+    this.ctx.lineTo(x, y);
+    this.ctx.strokeStyle = `rgb(${red}, ${green}, 200)`;
+    this.ctx.stroke();
+  }
+
   /**
    * Draws a circular outline representing the sight radius or bullet sight
    * radius of the given robot type, centered at (x, y)
@@ -367,7 +384,8 @@ export default class Renderer {
         img = this.imgs.bullet.slow;
       }
 
-      this.drawImage(img, x, y, cst.BULLET_SIZE_HALF);
+      this.drawCircleBullet(x, y, velX, velY);
+      //this.drawImage(img, x, y, cst.BULLET_SIZE_HALF);
     }
   }
 
